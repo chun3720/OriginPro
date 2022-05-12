@@ -9,7 +9,7 @@ import originpro as op
 year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
 
 
-raw, path, _, _ = fileloads(year_path, ".txt")
+raw, path, _, _ = fileloads(year_path, ".mpt")
 #exp_obj = build_data(path, raw, Supercap)
 
 #target_path = path + 'Capacitance\\output\\'
