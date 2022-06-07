@@ -17,7 +17,7 @@ output_path = f'{path}\\output\\'
 df = pd.read_excel(f'{output_path}GCD_tot.xlsx')
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = 'GCD ref3')
+graph = op.new_graph(template = 'GCD ref3-small')
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0
