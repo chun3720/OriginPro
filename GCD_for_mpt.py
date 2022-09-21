@@ -8,7 +8,6 @@ import originpro as op
 # plt.style.use('science')
 year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
 
-
 raw, path, _, _ = fileloads(year_path, ".mpt")
 #exp_obj = build_data(path, raw, Supercap)
 

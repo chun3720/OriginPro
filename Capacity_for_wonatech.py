@@ -9,16 +9,27 @@ import originpro as op
 year_path = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\Coin cell\\2022"
 
 
-raw, path, _, _ = fileloads(year_path, ".xlsx")
+raw, path, _, _ = fileloads(year_path, ".csv")
 #exp_obj = build_data(path, raw, Supercap)
 
-target_path = os.path.join(path, 'split\\output\\')
+target_path = os.path.join(path, 'output\\')
 target = os.path.join(f'{target_path}total.xlsx')
 #df = pd.read_excel(path +'\\split\\Capacity_tot.xlsx')
 df = pd.read_excel(target)
+
+# convert to mAh/g unit
+
+col_name = df.columns
+
+
+for i in range(0, len(col_name), 2):
+    col = col_name[i] 
+    df[col] = df[col] * 1000
+
+
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = 'GCD coin')
+graph = op.new_graph(template = 'Capacity-coin')
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0
