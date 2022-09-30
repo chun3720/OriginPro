@@ -15,10 +15,30 @@ raw, path, _, _ = fileloads(year_path, ".mpt")
 #target_path = path + 'Capacitance\\output\\'
 output_path = f'{path}\\output\\'
 df = pd.read_excel(f'{output_path}Capacity_tot.xlsx')
+n = df.shape[1]
+check = input("convert to specific capcity?: yes(y) or no(n)")
+
+if check.lower() == "y":
+    
+    mass = input("input tap density value (mg/cm2):" )
+    
+    area = input("input electrode area (cm2): " )
+    
+    loading = float(mass) * float(area)
+    
+    cols = df.columns
+    
+    for i in range(0, n, 2):
+        df[cols[i]] = df[cols[i]] * 1000 / loading
+    
+    
+    
+
+
 wks = op.find_sheet()
 wks.from_df(df)
 graph = op.new_graph(template = 'Capacity-LIC')
-n = df.shape[1]
+
 
 maxID, maxTIME = 0, 0
 
