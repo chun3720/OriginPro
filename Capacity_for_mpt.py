@@ -59,4 +59,7 @@ for i in range(0, n, 4):
 
 
 #op.save(file = path + 'output\\' + 'GCD_tot.opj')
-op.save(file = f'{path}output\\Capacity_tot.opj')
+if check.lower() == "y":
+    op.save(file = f'{path}output\\Capacity_specific.opj')
+else:
+    op.save(file = f'{path}output\\Capacity_tot.opj')
