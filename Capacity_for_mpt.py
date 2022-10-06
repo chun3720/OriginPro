@@ -20,23 +20,21 @@ check = input("convert to specific capcity?: yes(y) or no(n)")
 
 if check.lower() == "y":
     
-    mass = input("input tap density value (mg/cm2):" )
-    
-    
-    area = input("input electrode area (cm2): " )
-    
-    loading = float(mass) * float(area)
-
     cols = df.columns
+    i = 3
     
-    for i in range(0, n, 2):
+    while i < n:
         
+        mass = input(f"input areal density for data <{cols[i]}> (mg/cm2): ")
+        area = input(f"input electrode area for data <{cols[i]}> (cm2): " )
         
-        df[cols[i]] = df[cols[i]] * 1000 / loading
-    
-    
-    
-
+        loading = float(mass) * float(area)
+        
+        for j in range(i-3, i, 2):
+            df[cols[j]] = df[cols[j]] * 1000 / loading
+        
+        i += 4
+        
 
 wks = op.find_sheet()
 wks.from_df(df)
