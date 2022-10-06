@@ -22,13 +22,16 @@ if check.lower() == "y":
     
     mass = input("input tap density value (mg/cm2):" )
     
+    
     area = input("input electrode area (cm2): " )
     
     loading = float(mass) * float(area)
-    
+
     cols = df.columns
     
     for i in range(0, n, 2):
+        
+        
         df[cols[i]] = df[cols[i]] * 1000 / loading
     
     
@@ -37,7 +40,10 @@ if check.lower() == "y":
 
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = 'Capacity-LIC')
+
+template = "Capacity-specific" if check.lower() == "y" else 'Capacity-LIC'
+
+graph = op.new_graph(template = template)
 
 
 maxID, maxTIME = 0, 0
