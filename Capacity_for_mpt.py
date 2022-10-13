@@ -39,7 +39,7 @@ if check.lower() == "y":
 wks = op.find_sheet()
 wks.from_df(df)
 
-template = "Capacity-specific" if check.lower() == "y" else 'Capacity-LIC'
+template = "Capacity-specific" if check.lower() == "y" else 'Capacity-cycle'
 
 graph = op.new_graph(template = template)
 
