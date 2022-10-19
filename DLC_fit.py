@@ -4,8 +4,15 @@ import os
 import numpy as np
 import originpro as op
 
+#year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+py_name = "EC_DLC_from_CV_mpt.py"
 
-year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+path_df, path_file = get_data_folder(py_name)
+
+year_path, template = path_df.loc[py_name]
+if not template:
+    path_df["op"].loc[py_name] = 'DLC fit'
+    path_df.to_pickle(path_file)
 
 
 raw, path, _, _ = fileloads(year_path, ".xlsx")
@@ -23,7 +30,7 @@ wks = op.find_sheet()
 cols = df.columns
 #wks.from_df(df[cols[:3]])
 wks.from_df(df)
-graph = op.new_graph(template = 'DLC fit')
+graph = op.new_graph(template = path_df["op"].loc[py_name])
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0

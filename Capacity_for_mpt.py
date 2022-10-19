@@ -6,7 +6,24 @@ import originpro as op
 
 
 # plt.style.use('science')
-year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+#year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+
+py_name = "Supercap_GCD_mpt.py"
+norm = "Capacity_norm_op"
+specific = "Capacity_specific_op"
+
+path_df, path_file = get_data_folder(py_name)
+
+year_path, _ = path_df.loc[py_name]
+
+if not path_df.loc[norm].op:
+    path_df.loc[norm].op = 'Capacity-cycle'
+    path_df.to_pickle(path_file)
+
+if not path_df.loc[specific].op:
+    path_df.loc[specific].op = "Capacity-specific"
+    path_df.to_pickle(path_file)
+    
 
 
 raw, path, _, _ = fileloads(year_path, ".mpt")
@@ -30,6 +47,16 @@ if check.lower() == "y":
         
         loading = float(mass) * float(area)
         
+        check2skip = input("Applying to all other measurements?: yes(y) or no(n) ")
+        
+        if check2skip.lower() =="y":
+            
+            for k in range(0, n, 2):
+                df[cols[k]] = df[cols[k]] * 1000 /loading
+                      
+            break
+        
+        
         for j in range(i-3, i, 2):
             df[cols[j]] = df[cols[j]] * 1000 / loading
         
@@ -39,7 +66,7 @@ if check.lower() == "y":
 wks = op.find_sheet()
 wks.from_df(df)
 
-template = "Capacity-specific" if check.lower() == "y" else 'Capacity-cycle'
+template = path_df.loc[specific].op if check.lower() == "y" else path_df.loc[norm].op
 
 graph = op.new_graph(template = template)
 

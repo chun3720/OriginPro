@@ -6,7 +6,14 @@ import originpro as op
 
 
 # plt.style.use('science')
-year_path = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\Coin cell\\2022"
+#year_path = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\Coin cell\\2022"
+py_name = "Battery_GCD_wonatech.py"
+path_df, path_file = get_data_folder(py_name)
+
+year_path, template = path_df.loc[py_name]
+if not template:
+    path_df["op"].loc[py_name] = 'Capacity-coin'
+    path_df.to_pickle(path_file)
 
 
 raw, path, _, _ = fileloads(year_path, ".csv")
@@ -29,7 +36,7 @@ for i in range(0, len(col_name), 2):
 
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = 'Capacity-coin')
+graph = op.new_graph(template = path_df["op"].loc[py_name])
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0

@@ -8,6 +8,9 @@ last update : Feb 15 2022
 import os
 import string
 from dataclasses import dataclass
+from pathlib import Path
+import pandas as pd
+import sys
 
 def path_gen(path, file_ext = None):
     print('\nCurrent path: ')
@@ -48,19 +51,30 @@ def raw_check(path, file_ext):
         else:
             return check_true
 
-def fileloads(year_path, file_ext):  
+def fileloads(year_path: str, file_ext: str) -> List:  
     year_dict = path_gen(year_path)
-    folder_select = input("Select folder to analyze: ")
-    # date_path = year_path + '\\' + year_dict[int(folder_select)] + '\\'
-    date_path = os.path.join(year_path, year_dict[int(folder_select)]) + '\\'
-    list_check = raw_check(date_path, file_ext) 
-    if len(list_check) !=0:
-        list_true = list_check
-        path_true = date_path
-        path_gen(path_true, file_ext)
-        EXP_title = year_dict[int(folder_select)].replace("_", "-")
-        return (list_true, path_true, year_dict[int(folder_select)], EXP_title)  
+    folder_select = input("Select folder to analyze, (move to parent path: type(.):  ")
+    
+    if not folder_select:
+        raise SystemExit("Cancelling: no folder selected")
+        
+    elif folder_select == ".":
+        parent_path = Path(year_path).parent
+        
+        return fileloads(parent_path, file_ext)
+    
     else:
+        
+        # date_path = year_path + '\\' + year_dict[int(folder_select)] + '\\'
+        date_path = os.path.join(year_path, year_dict[int(folder_select)]) + '\\'
+        list_check = raw_check(date_path, file_ext) 
+        if len(list_check) !=0:
+            list_true = list_check
+            path_true = date_path
+            path_gen(path_true, file_ext)
+            EXP_title = year_dict[int(folder_select)].replace("_", "-")
+            return (list_true, path_true, year_dict[int(folder_select)], EXP_title)  
+        # else:
         return fileloads(date_path, file_ext)
 
 #class Dataloads(object):
@@ -97,3 +111,14 @@ def build_data(path, file, builder):
 #from datetime import datetime
 #
 #print(datetime.now().isoformat(timespec = 'minutes'))
+
+def get_data_folder(py_name):
+    curr_path = Path(r"C:\Users\user\Documents\GitHub\OriginPro")
+    path_info = "path_ref.pkl"
+    path_file = curr_path.parent.joinpath(path_info)
+    
+    df = pd.read_pickle(path_file)
+    
+    return df, path_file
+    
+    
