@@ -113,7 +113,7 @@ def build_data(path, file, builder):
 #print(datetime.now().isoformat(timespec = 'minutes'))
 
 def get_data_folder(py_name):
-    curr_path = Path(r"C:\Users\user\Documents\GitHub\OriginPro")
+    curr_path = Path(sys.path[0])
     path_info = "path_ref.pkl"
     path_file = curr_path.parent.joinpath(path_info)
     

@@ -31,7 +31,8 @@ raw, path, _, _ = fileloads(year_path, ".mpt")
 
 #target_path = path + 'Capacitance\\output\\'
 output_path = f'{path}\\output\\'
-df = pd.read_excel(f'{output_path}Capacity_tot.xlsx')
+#df = pd.read_excel(f'{output_path}Capacity_tot.xlsx')
+df = pd.read_pickle(f'{output_path}Capacity_tot.pkl')
 n = df.shape[1]
 check = input("convert to specific capcity?: yes(y) or no(n)")
 
@@ -66,7 +67,7 @@ if check.lower() == "y":
 wks = op.find_sheet()
 wks.from_df(df)
 
-template = path_df.loc[specific].op if check.lower() == "y" else path_df.loc[norm].op
+template = "Capacity-cy" if check.lower() == "y" else path_df.loc[norm].op
 
 graph = op.new_graph(template = template)
 

@@ -35,7 +35,7 @@ n = df.shape[1]
     #
 #temp = maxTIME//50
 
-#print(n)
+
 for i in range(0, n, 2):
     graph[0].add_plot(wks, colx = i, coly = i+1)
     #graph[0].set_xlim(0, (temp+1)*50, 50)

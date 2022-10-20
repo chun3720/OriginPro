@@ -20,7 +20,8 @@ raw, path, _, _ = fileloads(year_path, ".mpt")
 
 #target_path = path + 'Capacitance\\output\\'
 output_path = f'{path}\\output\\'
-df = pd.read_excel(f'{output_path}GCD_tot.xlsx')
+#df = pd.read_excel(f'{output_path}GCD_tot.xlsx')
+df = pd.read_pickle(f'{output_path}GCD_tot.pkl')
 wks = op.find_sheet()
 wks.from_df(df)
 graph = op.new_graph(template = path_df["op"].loc[py_name])
