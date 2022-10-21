@@ -20,9 +20,11 @@ raw, path, _, _ = fileloads(year_path, ".csv")
 #exp_obj = build_data(path, raw, Supercap)
 
 target_path = os.path.join(path, 'output\\')
-target = os.path.join(f'{target_path}total.xlsx')
+#target = os.path.join(f'{target_path}total.xlsx')
+target = os.path.join(f'{target_path}total.pkl')
 #df = pd.read_excel(path +'\\split\\Capacity_tot.xlsx')
-df = pd.read_excel(target)
+#df = pd.read_excel(target)
+df = pd.read_pickle(target)
 
 # convert to mAh/g unit
 

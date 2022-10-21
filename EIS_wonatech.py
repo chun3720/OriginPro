@@ -14,7 +14,7 @@ path_df, path_file = get_data_folder(py_name)
 
 year_path, template = path_df.loc[py_name]
 if not template:
-    path_df["op"].loc[py_name] = 'EIS-ref'
+    path_df["op"].loc[py_name] = 'EIS ref'
     path_df.to_pickle(path_file)
 
 

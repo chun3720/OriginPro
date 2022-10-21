@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import pandas as pd
 import sys
+from typing import List
 
 def path_gen(path, file_ext = None):
     print('\nCurrent path: ')
