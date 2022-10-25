@@ -16,7 +16,7 @@ if not template:
     path_df.to_pickle(path_file)
 
 
-raw, path, _, _ = fileloads(year_path, ".csv")
+raw, path, _, _ = fileloads(year_path, ".pqt")
 #exp_obj = build_data(path, raw, Supercap)
 
 target_path = os.path.join(path, 'output\\')
