@@ -25,7 +25,8 @@ if check.lower() == "y":
     cols = df.columns
     
     for i in range(1, n, 2):
-        df[cols[i]] =  df[cols[i]]*100/ df[cols[i]][0]  
+        val = df[cols[i]].iloc[0]
+        df[cols[i]] =  df[cols[i]]*100/ val
         
     
     
