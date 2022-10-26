@@ -19,10 +19,21 @@ if not template:
 raw, path, _, _ = fileloads(year_path, ".xlsx")
 output_path = f'{path}\\output\\'
 df = pd.read_excel(f'{output_path}Cycle_tot.xlsx')
+n = df.shape[1]
+check = input("Convert to relative capacity?: yes (y) or no (n)")
+if check.lower() == "y":
+    cols = df.columns
+    
+    for i in range(1, n, 2):
+        df[cols[i]] =  df[cols[i]]*100/ df[cols[i]][0]  
+        
+    
+    
+
 wks = op.find_sheet()
 wks.from_df(df)
 graph = op.new_graph(template = template)
-n = df.shape[1]
+
 
 #maxID, maxTIME = 0, 0
 #
