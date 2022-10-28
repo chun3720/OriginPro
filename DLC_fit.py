@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import numpy as np
 import originpro as op
+import math
 
 #year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
 py_name = "EC_DLC_from_CV_mpt.py"
@@ -11,7 +12,7 @@ path_df, path_file = get_data_folder(py_name)
 
 year_path, template = path_df.loc[py_name]
 if not template:
-    path_df["op"].loc[py_name] = 'DLC fit'
+    path_df["op"].loc[py_name] = load_template()
     path_df.to_pickle(path_file)
 
 

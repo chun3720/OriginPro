@@ -9,6 +9,7 @@ import os
 import string
 from dataclasses import dataclass
 from pathlib import Path
+import PySimpleGUI as sg
 import pandas as pd
 import sys
 from typing import List
@@ -122,4 +123,19 @@ def get_data_folder(py_name):
     
     return df, path_file
     
+
     
+
+def load_template():
+    
+    init_path = r"C:\Users\user\Documents\OriginLab\User Files"
+    temp_path = sg.popup_get_file('Template is missing! please select a template', initial_folder = init_path)
+    temp_file = Path(temp_path)
+    if not temp_path:
+        sg.popup("Cancel", "No file selected")
+        raise SystemExit("Canceling: no file selected")
+    else:
+        sg.popup(f"The template you chose was {temp_file.name}")
+        
+    
+    return os.path.splitext(temp_file.name)[0]

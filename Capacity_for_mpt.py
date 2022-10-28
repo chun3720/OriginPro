@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import numpy as np
 import originpro as op
-
+import math
 
 # plt.style.use('science')
 #year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
@@ -17,11 +17,13 @@ path_df, path_file = get_data_folder(py_name)
 year_path, _ = path_df.loc[py_name]
 
 if not path_df.loc[norm].op:
-    path_df.loc[norm].op = 'Capacity-cycle'
+    print("select teplate for normal capacity")
+    path_df.loc[norm].op = load_template()
     path_df.to_pickle(path_file)
 
 if not path_df.loc[specific].op:
-    path_df.loc[specific].op = "Capacity-specific"
+    print("select teplate for normal capacity")
+    path_df.loc[specific].op = load_template()
     path_df.to_pickle(path_file)
     
 
@@ -67,7 +69,7 @@ if check.lower() == "y":
 wks = op.find_sheet()
 wks.from_df(df)
 
-template = "Capacity-cy" if check.lower() == "y" else path_df.loc[norm].op
+template = path_df.loc[specific].op if check.lower() == "y" else path_df.loc[norm].op
 
 graph = op.new_graph(template = template)
 

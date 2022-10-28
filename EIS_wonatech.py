@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import numpy as np
 import originpro as op
-
+import math
 
 # plt.style.use('science')
 #year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\EIS"
@@ -13,8 +13,9 @@ py_name = "EIS_wonatech.py"
 path_df, path_file = get_data_folder(py_name)
 
 year_path, template = path_df.loc[py_name]
+
 if not template:
-    path_df["op"].loc[py_name] = 'EIS ref'
+    path_df["op"].loc[py_name] = load_template()
     path_df.to_pickle(path_file)
 
 
@@ -33,7 +34,7 @@ output_path = f'{path}\\output\\'
 df = pd.read_excel(f'{output_path}EIS_total.xlsx')
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = template)
+graph = op.new_graph(template = path_df["op"].loc[py_name])
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0

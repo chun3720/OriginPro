@@ -1,9 +1,10 @@
-from loadexp import fileloads, get_data_folder
+from loadexp import fileloads, get_data_folder, load_template
 import pandas as pd
 import os
 import numpy as np
 import originpro as op
 from pathlib import Path
+import math
 
 # plt.style.use('science')
 #year_path = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\Coin cell\\2022\\"
@@ -11,8 +12,10 @@ py_name = "Battery_cycle.py"
 path_df, path_file = get_data_folder(py_name)
 
 year_path, template = path_df.loc[py_name]
+
 if not template:
-    path_df["op"].loc[py_name] = "cycle-coin"
+    
+    path_df["op"].loc[py_name] = load_template()
     path_df.to_pickle(path_file)
     
 
@@ -33,7 +36,7 @@ if check.lower() == "y":
 
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = template)
+graph = op.new_graph(template = path_df["op"].loc[py_name])
 
 
 #maxID, maxTIME = 0, 0

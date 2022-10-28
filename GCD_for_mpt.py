@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import numpy as np
 import originpro as op
+import math
 
 
 # plt.style.use('science')
@@ -12,7 +13,7 @@ path_df, path_file = get_data_folder(py_name)
 
 year_path, template = path_df.loc[py_name]
 if not template:
-    path_df["op"].loc[py_name] = 'GCD ref3-small'
+    path_df["op"].loc[py_name] = load_template()
     path_df.to_pickle(path_file)
 
 raw, path, _, _ = fileloads(year_path, ".mpt")
