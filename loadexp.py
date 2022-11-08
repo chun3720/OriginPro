@@ -55,12 +55,24 @@ def raw_check(path, file_ext):
 
 def fileloads(year_path: str, file_ext: str) -> List:  
     year_dict = path_gen(year_path)
-    folder_select = input("Select folder to analyze, (move to parent path: type(.):  ")
-    
-    if not folder_select:
-        raise SystemExit("Cancelling: no folder selected")
+    done = False
+    n = len(year_dict)
+    while not done:
         
-    elif folder_select == ".":
+        folder_select = input("Select folder to analyze, (move to parent path: type(.):  ")
+        
+        if folder_select.isnumeric() and int(folder_select) in range(n) or folder_select == ".":
+            done = True
+            
+        print("Invalid input! retry")
+        
+        if not folder_select:
+            done = True
+        
+    # if not folder_select:
+    #     raise SystemExit("Cancelling: no folder selected")
+        
+    if folder_select == ".":
         parent_path = Path(year_path).parent
         
         return fileloads(parent_path, file_ext)
@@ -138,4 +150,5 @@ def load_template():
         sg.popup(f"The template you chose was {temp_file.name}")
         
     
-    return os.path.splitext(temp_file.name)[0]
+    #return os.path.splitext(temp_file.name)[0]
+    return temp_file.stem

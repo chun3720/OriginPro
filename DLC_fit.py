@@ -22,10 +22,10 @@ raw, path, _, _ = fileloads(year_path, ".xlsx")
 #target_path = path + 'Capacitance\\output\\'
 #output_path = f'{path}\\output\\'
 
-#xl_file = [_ for _ in os.listdir(output_path) if _.endswith('xlsx') ]
+xl_file = [_ for _ in os.listdir(path) if _.endswith('xlsx') ]
 
-#df = pd.read_excel(f'{output_path}{xl_file[0]}', sheet_name = 1)
-df = pd.read_excel(f'{path}summary.xlsx')
+df = pd.read_excel(f'{path}{xl_file[0]}')
+#df = pd.read_excel(f'{path}summary.xlsx')
 
 wks = op.find_sheet()
 cols = df.columns
