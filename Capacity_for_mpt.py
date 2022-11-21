@@ -58,7 +58,7 @@ if check.lower() == "y":
         
         if check2skip.lower() =="y":
             
-            for k in range(0, n, 2):
+            for k in range(i-3, n, 2):
                 df[cols[k]] = df[cols[k]] * 1000 /loading
                       
             break
