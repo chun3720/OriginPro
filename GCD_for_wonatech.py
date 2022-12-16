@@ -6,7 +6,16 @@ import originpro as op
 
 
 # plt.style.use('science')
-year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+#year_path  = "D:\\Researcher\\JYCheon\\DATA\\Electrochemistry\\2022\\Raw"
+
+py_name = "Supercap_GCD_Wonatech.py"
+path_df, path_file = get_data_folder(py_name)
+
+year_path, template = path_df.loc[py_name]
+if not template:
+    path_df["op"].loc[py_name] = load_template()
+    path_df.to_pickle(path_file)
+
 
 
 raw, path, _, _ = fileloads(year_path, ".xlsx")
@@ -17,7 +26,7 @@ output_path = f'{path}\\split\\output\\'
 df = pd.read_excel(f'{output_path}GCD_tot.xlsx')
 wks = op.find_sheet()
 wks.from_df(df)
-graph = op.new_graph(template = 'GCD ref3')
+graph = op.new_graph(template = path_df["op"].loc[py_name])
 n = df.shape[1]
 
 maxID, maxTIME = 0, 0
